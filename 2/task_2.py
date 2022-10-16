@@ -1,4 +1,4 @@
-"""Написать 3 скрипта, которые соберут с сайта по всем городам адрес (город, улица,
+"""Написать скрипт, которые соберут с сайта по всем городам адрес (город, улица,
 номер дома и т.п.), координаты, время работы (разделённое по дням) и телефоны
 (общий и дополнительные, если указаны)."""
 
@@ -12,7 +12,7 @@ from scrapy.selector import Selector
 main_response = requests.get('https://som1.ru/shops/',
                         headers = {
                             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
-                        })
+                        }) #запрос на сайт который мы хотим изучить
 
 
 scripts = Selector(text=main_response.text).xpath("//script/text()").extract()

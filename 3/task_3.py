@@ -1,4 +1,4 @@
-"""Написать 3 скрипта, которые соберут с сайта по всем городам адрес (город, улица,
+"""Написать скрипт, которые соберут с сайта по всем городам адрес (город, улица,
 номер дома и т.п.), координаты, время работы (разделённое по дням) и телефоны
 (общий и дополнительные, если указаны)."""
 
@@ -11,7 +11,7 @@ from scrapy.selector import Selector
 main_response = requests.get('https://naturasiberica.ru/our-shops/',headers={
 "User-Agent" : "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
                "Chrome/51.0.2704.103 Safari/537.36"
-})
+}) #запрос на сайт который мы хотим изучить
 
 items = Selector(text=main_response.text).xpath('//p[@class="card-list__description"]/text()').extract()
 
@@ -34,13 +34,13 @@ for i, page in enumerate(pages):
     data['address'] = adress[i]
 
 
-    main_response = requests.get(f'https://www.google.com/maps/search/{adress[i]}')
+    main_response = requests.get(f'https://www.google.com/maps/search/{adress[i]}') #запрос для извлечения координат
 
     data['latlon'] = [float(coord) for coord in re.split('&|=|%2C', Selector(text=main_response.text).xpath('//meta['
                                                                                                        '@itemprop="image"]/'
                                                                                                        '@content').get())[1:3]]
 
-    res = requests.get('https://naturasiberica.ru/our-shops/' + page)
+    res = requests.get('https://naturasiberica.ru/our-shops/' + page) # #запрос по всем страницам из переменной page
 
     data['name'] = name
     data['phones'] = Selector(text=res.text).xpath('//*[@id="shop-phone-by-city"]/text()').extract()
