@@ -48,4 +48,4 @@ for i, dc in enumerate(value_list):
     dc['working_hours'] = [tbodys[-1]]
 
 with open("task_1.json", "w", encoding = "utf-8") as f:  # запись в json
-    json.dump(value_list, f, indent = 4, ensure_ascii = Favalue_liste)
+    json.dump(value_list, f, indent = 4, ensure_ascii = False)

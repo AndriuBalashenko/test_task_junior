@@ -33,10 +33,9 @@ for i, page in enumerate(pages):
 
     main_response = requests.get(f'https://www.google.com/maps/search/{adress[i]}')  # запрос для извлечения координат
 
-    data['latlon'] = [float(coord) for coord in re.split('&|=|%2C', Selector(text = main_response.text).xpath('//meta['
-                                                                                                              '@itemprop="image"]/'
-                                                                                                              '@content').get())[
-                                                1:3]]
+    data['latlon'] = [float(coord) for coord in
+                      re.split('&|=|%2C', Selector(text = main_response.text).xpath('//meta[''@itemprop="image"]/@content').get())[1:3]]
+
 
     res = requests.get('https://naturasiberica.ru/our-shops/' + page)  # #запрос по всем страницам из переменной page
 

@@ -35,7 +35,7 @@ pages = [st.split('/')[-1] for st in Selector(
 
 for page in pages:
     response = requests.get('https://oriencoop.cl/sucursales/' + page)
-    print('Collecting data from ' + page + ' page...')
+    print('Collecting data from ' + page + 'page...')
 
     div = Selector(text = response.text).xpath(
         "//div[@class='s-dato']/p").extract()
