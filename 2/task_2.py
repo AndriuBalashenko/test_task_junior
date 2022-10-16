@@ -22,6 +22,7 @@ value_list = [script.replace("cords", "latlon")
 
 
 def func(st: str):
+    """Узнаем координаты на карте"""
     coords_re = re.compile(r'\((.+)\)')
     js = json.loads(coords_re.search(st).group(1).replace("'", '"'))
     return js
@@ -29,9 +30,9 @@ def func(st: str):
 
 value_list = func(value_list[0])
 
-for dc in value_list:
-    l = [float(cord) for cord in dc['latlon']]
-    dc['latlon'] = l
+for value_data in value_list:
+    l = [float(cord) for cord in value_data['latlon']]
+    value_data['latlon'] = l
 
 for i, div in enumerate(divs):
     value_list[i]['address'] = div
@@ -39,13 +40,13 @@ for i, div in enumerate(divs):
 pages = [link.split('/')[-2] for link in Selector(
     text = main_response.text).xpath("//a[@class='btn btn-blue']/@href").extract()]
 
-for i, dc in enumerate(value_list):
+for i, value_data in enumerate(value_list):
     main_response = requests.get('https://som1.ru/shops/' +
                                  pages[i] + '/', headers = {'User-Agent': 'My User Agent 1.0'})
     tbodys = Selector(text = main_response.text).xpath(
         "//table[@class='shop-info-table']/tr/td/text()").extract()
-    dc['phones'] = tbodys[-4].split(',')
-    dc['working_hours'] = [tbodys[-1]]
+    value_data['phones'] = tbodys[-4].split(',')
+    value_data['working_hours'] = [tbodys[-1]]
 
 with open("task_1.json", "w", encoding = "utf-8") as f:  # запись в json
     json.dump(value_list, f, indent = 4, ensure_ascii = False)
