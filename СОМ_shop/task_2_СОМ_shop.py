@@ -48,5 +48,5 @@ for i, value_data in enumerate(value_list):
     value_data['phones'] = tbodys[-4].split(',')
     value_data['working_hours'] = [tbodys[-1]]
 
-with open("task_1.json", "w", encoding = "utf-8") as f:  # запись в json
+with open("СОМ_shop.json", "w", encoding = "utf-8") as f:  # запись в json
     json.dump(value_list, f, indent = 4, ensure_ascii = False)

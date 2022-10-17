@@ -57,5 +57,5 @@ for page in pages:
     data['working_hours'] = working_time(time_span_list)
     value_list.append(data)
 
-with open("task_1.json", "a", encoding = "utf-8") as f:  # запись в json
+with open("Oriencoop.json", "a", encoding = "utf-8") as f:  # запись в json
     json.dump(value_list, f, indent = 4, ensure_ascii = False)

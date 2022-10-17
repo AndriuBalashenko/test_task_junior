@@ -45,5 +45,5 @@ for i, page in enumerate(pages):
     print(f'Collecting data from {page}... ' + f'{i + 1} of {len(pages)}')
     value_list.append(data)
 
-with open("task_3.json", "w", encoding = "utf-8") as f:  # запись в json
+with open("Natura_Siberica.json", "w", encoding = "utf-8") as f:  # запись в json
     json.dump(value_list, f, indent = 4, ensure_ascii = False)
